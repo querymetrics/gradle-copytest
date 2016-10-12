@@ -1,0 +1,33 @@
+apply plugin: 'groovy'
+
+
+// dependency management as you like
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+apply plugin: 'maven'
+group = 'com.querymetrics.ajplugin'
+
+configurations {
+    includeInJar
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:2.1.0'
+    compile 'org.aspectj:aspectjtools:1.8.9'
+    runtime 'org.aspectj:aspectjrt:1.8.9'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.version = version
+        pom.artifactId = 'ajplugin'
+    }
+}
